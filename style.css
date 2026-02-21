@@ -4,21 +4,81 @@
   padding: 0;
 }
 
+/* ── 테마 변수 ── */
+body.dark {
+  --bg: #1a1a2e;
+  --card-bg: #16213e;
+  --text: #ffffff;
+  --subtitle: #aaaaaa;
+  --empty-msg: #666666;
+  --history-label: #888888;
+  --history-index: #666666;
+  --toggle-bg: rgba(255,255,255,0.1);
+  --toggle-color: #ffffff;
+  --toggle-border: rgba(255,255,255,0.2);
+}
+
+body.light {
+  --bg: #f0f4ff;
+  --card-bg: #ffffff;
+  --text: #1a1a2e;
+  --subtitle: #666666;
+  --empty-msg: #aaaaaa;
+  --history-label: #999999;
+  --history-index: #aaaaaa;
+  --toggle-bg: rgba(0,0,0,0.07);
+  --toggle-color: #1a1a2e;
+  --toggle-border: rgba(0,0,0,0.15);
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #1a1a2e;
-  color: #fff;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.3s, color 0.3s;
 }
 
+/* ── 테마 토글 버튼 ── */
+#themeToggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: var(--toggle-bg);
+  color: var(--toggle-color);
+  border: 1px solid var(--toggle-border);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.1s, box-shadow 0.1s;
+  box-shadow: none;
+  z-index: 100;
+}
+
+#themeToggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#themeToggle:active {
+  transform: translateY(0);
+}
+
+/* ── 컨테이너 ── */
 .container {
   text-align: center;
   padding: 40px 20px;
   max-width: 500px;
   width: 100%;
+  background: var(--card-bg);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 h1 {
@@ -28,12 +88,13 @@ h1 {
 }
 
 .subtitle {
-  color: #aaa;
+  color: var(--subtitle);
   margin-bottom: 40px;
   font-size: 0.95rem;
+  transition: color 0.3s;
 }
 
-/* 공 영역 */
+/* ── 공 영역 ── */
 .balls {
   display: flex;
   justify-content: center;
@@ -45,8 +106,9 @@ h1 {
 }
 
 .empty-msg {
-  color: #666;
+  color: var(--empty-msg);
   font-size: 0.95rem;
+  transition: color 0.3s;
 }
 
 .ball {
@@ -68,15 +130,15 @@ h1 {
   to   { transform: scale(1); opacity: 1; }
 }
 
-/* 번호대별 색상 */
+/* ── 번호대별 색상 ── */
 .ball.yellow, .small-ball.yellow { background: radial-gradient(circle at 35% 35%, #ffe066, #e6a800); }
 .ball.blue,   .small-ball.blue   { background: radial-gradient(circle at 35% 35%, #66aaff, #1155cc); }
 .ball.red,    .small-ball.red    { background: radial-gradient(circle at 35% 35%, #ff7070, #cc1111); }
 .ball.gray,   .small-ball.gray   { background: radial-gradient(circle at 35% 35%, #aaaaaa, #555555); }
 .ball.green,  .small-ball.green  { background: radial-gradient(circle at 35% 35%, #66dd88, #227744); }
 
-/* 버튼 */
-button {
+/* ── 번호 생성 버튼 ── */
+#generateBtn {
   background: #f0c040;
   color: #1a1a2e;
   border: none;
@@ -89,16 +151,16 @@ button {
   box-shadow: 0 4px 16px rgba(240, 192, 64, 0.4);
 }
 
-button:hover {
+#generateBtn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(240, 192, 64, 0.6);
 }
 
-button:active {
+#generateBtn:active {
   transform: translateY(0);
 }
 
-/* 히스토리 */
+/* ── 히스토리 ── */
 .history {
   margin-top: 40px;
   text-align: left;
@@ -106,10 +168,11 @@ button:active {
 
 .history h2 {
   font-size: 0.9rem;
-  color: #888;
+  color: var(--history-label);
   margin-bottom: 12px;
   text-align: center;
   letter-spacing: 0.05em;
+  transition: color 0.3s;
 }
 
 .history-row {
@@ -122,10 +185,11 @@ button:active {
 
 .history-index {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--history-index);
   width: 28px;
   text-align: right;
   flex-shrink: 0;
+  transition: color 0.3s;
 }
 
 .small-ball {

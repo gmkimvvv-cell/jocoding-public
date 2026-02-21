@@ -1,5 +1,17 @@
 let historyList = [];
 
+function toggleTheme() {
+  const body = document.body;
+  const btn = document.getElementById('themeToggle');
+  if (body.classList.contains('dark')) {
+    body.classList.replace('dark', 'light');
+    btn.textContent = '🌙 다크 모드';
+  } else {
+    body.classList.replace('light', 'dark');
+    btn.textContent = '☀️ 라이트 모드';
+  }
+}
+
 function getBallColor(num) {
   if (num <= 10) return 'yellow';
   if (num <= 20) return 'blue';
